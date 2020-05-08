@@ -396,14 +396,18 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     }
     @Override
     public void requestError (ResponseBean responseBean) {
-        if (responseBean.isTimeout()&&responseBean.getActionResult().getMessage()!=null){
+        if (responseBean.getActionResult().getMessage() != null) {
             requestError(responseBean.getActionResult().getMessage());
-        }
-        if (responseBean.getStatusCode().equals("401")&&responseBean.getMessage()!=null) {
+        } else if (responseBean.getMessage() != null) {
             requestError(responseBean.getMessage());
         }
-        cancleRequest();
-        reStartApp();
+        if (responseBean.isTimeout()) {
+            cancleRequest();
+            reStartApp();
+        } else if (responseBean.getStatusCode() != null && responseBean.getStatusCode().equals("401")) {
+            cancleRequest();
+            reStartApp();
+        }
     }
 
     public void cancleRequest(){
