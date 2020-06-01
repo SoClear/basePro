@@ -37,7 +37,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
 
 
     @Override
-    public void loadData (String url,final String methodName,Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void loadData (final String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         Log.d (TAG,"paraMap = " + paraMap.toString ());
         compositeSubscription.add (iServiceApi.load (url,paraMap)
                 .observeOn (AndroidSchedulers.mainThread ())
@@ -62,6 +62,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName);
 
                     }
@@ -69,7 +70,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
     }
 
     @Override
-    public void getData(String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void getData(final String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         compositeSubscription.add (iServiceApi.get (url,paraMap)
                 .observeOn (AndroidSchedulers.mainThread ())
                 .subscribeOn (Schedulers.io())
@@ -93,6 +94,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName);
 
                     }
@@ -100,7 +102,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
     }
 
     @Override
-    public void postData(String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void postData(final String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         String obj=gson.toJson(paraMap);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),obj);
         compositeSubscription.add (iServiceApi.post (url,body)
@@ -126,6 +128,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName);
 
                     }
@@ -133,7 +136,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
     }
 
     @Override
-    public void putData(String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void putData(final String url, final String methodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         String obj=gson.toJson(paraMap);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),obj);
         compositeSubscription.add (iServiceApi.put (url,body)
@@ -159,6 +162,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
 
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName);
 
@@ -167,7 +171,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
     }
 
     @Override
-    public void loadData (String url,final String methodName,final String errorMethodName,Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void loadData (final String url, final String methodName, final String errorMethodName, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         Log.d (TAG,"paraMap = " + paraMap.toString ());
         compositeSubscription.add (iServiceApi.load (url,paraMap)
                 .observeOn (AndroidSchedulers.mainThread ())
@@ -192,13 +196,14 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName,errorMethodName);
 
                     }
                 }));
     }
     @Override
-    public void loadData (String url, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void loadData (final String url, Map paraMap, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         Log.d (TAG,"paraMap = " + paraMap.toString ());
         compositeSubscription.add (iServiceApi.load (url,paraMap)
                 .observeOn (AndroidSchedulers.mainThread ())
@@ -223,6 +228,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean);
                     }
                 }));
@@ -230,7 +236,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
 
    
     @Override
-    public void upload (String url,final String methodName, Map paraMap, MultipartBody.Part[] filePart, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
+    public void upload (final String url, final String methodName, Map paraMap, MultipartBody.Part[] filePart, final IBaseRequestCallBack<ResponseBean> iBaseRequestCallBack) {
         Log.d (TAG,"paraMap = " + paraMap.toString ());
         Log.d (TAG,"filePart = " + filePart.toString ());
         compositeSubscription.add (iServiceApi.uploadFile (url,paraMap,filePart)
@@ -256,6 +262,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onNext (ResponseBean responseBean) {
                         //回调接口，请求成功，获取实体类对象
+                        responseBean.setRequestMineUrl(url);
                         iBaseRequestCallBack.requestSuccess (responseBean,methodName);
 
                     }

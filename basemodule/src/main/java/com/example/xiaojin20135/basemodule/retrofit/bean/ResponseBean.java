@@ -43,6 +43,15 @@ public class ResponseBean {
     private String errorCode;
     private String message;
     private Map result;
+    private String requestMineUrl;
+
+    public String getRequestMineUrl() {
+        return requestMineUrl;
+    }
+
+    public void setRequestMineUrl(String requestMineUrl) {
+        this.requestMineUrl = requestMineUrl;
+    }
 
     private boolean success;
 

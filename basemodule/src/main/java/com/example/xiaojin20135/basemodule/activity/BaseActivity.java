@@ -499,7 +499,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlertDialog(this, "获取数据成功但是处理数据过程错误：" + e.getLocalizedMessage());
+                    showAlertDialog(this, "获取数据成功但是处理数据过程错误");
                 }
             } else {
                 showAlertDialog(this, "not found " + methodName + " method");
@@ -563,7 +563,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     @Override
     public void requestError(ResponseBean responseBean) {
-        if (responseBean.getActionResult().getMessage() != null) {
+        if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
             requestError(responseBean.getActionResult().getMessage());
         } else if (responseBean.getMessage() != null) {
             requestError(responseBean.getMessage());

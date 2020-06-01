@@ -334,7 +334,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
                     Log.d (TAG,"调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"没有找到自定义回调："+e.getLocalizedMessage ());
+                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"获取数据成功但是处理数据过程错误");
                 }
             }else{
                 ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"not found "+methodName+" method");
@@ -396,7 +396,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     }
     @Override
     public void requestError (ResponseBean responseBean) {
-        if (responseBean.getActionResult().getMessage() != null) {
+        if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
             requestError(responseBean.getActionResult().getMessage());
         } else if (responseBean.getMessage() != null) {
             requestError(responseBean.getMessage());
