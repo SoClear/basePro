@@ -754,6 +754,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        dismissProgress();
         cancleRequest();
     }
 

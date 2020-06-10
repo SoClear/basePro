@@ -42,6 +42,7 @@ public abstract class ApproveActivity extends ToolBarActivity {
     public String mobileDataAction = "";
     public String mobileForm = "";
     public  boolean isDisableButton=true;
+    public boolean isRefresh;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -177,5 +178,19 @@ public abstract class ApproveActivity extends ToolBarActivity {
         }else{
             showAlertDialog (this,actionResult.getMessage ());
         }
+    }
+
+    @Override
+    public void requestError(String message) {
+        super.requestError(message);
+        isRefresh=true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isRefresh){
+            this.setResult (RESULT_OK);
+        }
+        finish();
     }
 }
