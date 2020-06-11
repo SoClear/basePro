@@ -26,6 +26,7 @@ import com.example.xiaojin20135.basemodule.retrofit.presenter.PresenterImpl;
 import com.example.xiaojin20135.basemodule.retrofit.util.HttpError;
 import com.example.xiaojin20135.basemodule.retrofit.view.IBaseView;
 import com.example.xiaojin20135.basemodule.util.ConstantUtil;
+import com.example.xiaojin20135.basemodule.view.others.BaseToast;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -143,7 +144,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         alertDialog.setTitle(title);
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ;
@@ -157,7 +158,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         alertDialog.setTitle("");
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ;
@@ -171,7 +172,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         alertDialog.setTitle("");
         alertDialog.setMessage(id);
         alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ;
@@ -187,7 +188,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             toast.setText(text);
         }
         toast.show();*/
-        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
+//        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
+        BaseToast.showNOrmalToast(mContext,text);
     }
 
     public static void showToast(Context mContext, int id) {
@@ -197,7 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             toast.setText(id);
         }
         toast.show();*/
-        Toast.makeText(mContext, id, Toast.LENGTH_LONG).show();
+        BaseToast.showNOrmalToast(mContext,id);
     }
 
     /**
