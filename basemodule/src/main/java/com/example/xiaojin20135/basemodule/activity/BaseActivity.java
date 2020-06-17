@@ -61,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     private int lastReqCode = -1;
 
+    private boolean isRestart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +141,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, String text, String title) {
-        alertDialog = new AlertDialog.Builder(context);
+        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
         alertDialog.setTitle(title);
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
@@ -154,7 +155,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, String text) {
-        alertDialog = new AlertDialog.Builder(context);
+        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
         alertDialog.setTitle("");
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
@@ -168,7 +169,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, int id) {
-        alertDialog = new AlertDialog.Builder(context);
+        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
         alertDialog.setTitle("");
         alertDialog.setMessage(id);
         alertDialog.setCancelable(false);
@@ -232,7 +233,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         //等待框
         if (isShowProgressDialog) {
             if (progressDialog == null || !progressDialog.isShowing()) {
-                progressDialog = new ProgressDialog(this);
+                progressDialog = new ProgressDialog(this,R.style.BDAlertDialog);
             }
 //            Window window = getWindow();
 //            window.setWindowAnimations(R.style.NoAnimationDialog); // 添加动画
@@ -261,7 +262,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public void showProgress(boolean hideTitle, String message, boolean cancled) {
         //等待框
         if (progressDialog == null || !progressDialog.isShowing()) {
-            progressDialog = new ProgressDialog(this);
+            progressDialog = new ProgressDialog(this,R.style.BDAlertDialog);
         }
         progressDialog.setMessage(message);
         if (!hideTitle) {
@@ -571,10 +572,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             requestError(responseBean.getMessage());
         }
         if (responseBean.isTimeout()) {
-            cancleRequest();
             reStartApp();
         } else if (responseBean.getStatusCode() != null && responseBean.getStatusCode().equals("401")) {
-            cancleRequest();
             reStartApp();
         }
 
@@ -588,9 +587,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void reStartApp() {
-        Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        cancleRequest();
+        if (!isRestart){
+            isRestart=true;
+            Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+
     }
 
     @Override
