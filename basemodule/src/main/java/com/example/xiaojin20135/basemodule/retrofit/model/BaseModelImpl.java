@@ -57,7 +57,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -89,7 +89,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -123,7 +123,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -157,7 +157,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -191,7 +191,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -223,7 +223,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
@@ -257,7 +257,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     @Override
                     public void onError (Throwable e) {
                         //回调接口，请求异常
-                        iBaseRequestCallBack.requestError (e);
+                        iBaseRequestCallBack.requestError (new Throwable("错误信息:"+url,e));
                     }
                     @Override
                     public void onNext (ResponseBean responseBean) {
