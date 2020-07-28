@@ -30,7 +30,19 @@ public enum HttpError {
         String message = "";
         CrashHandler.getInstance().handleException(throwable);
 
-        if (throwable instanceof HttpException) {
+        if (throwable instanceof SocketTimeoutException || throwable instanceof SocketException) {
+            message = "网络连接超时，请检查您的网络状态！";
+        } else if (throwable instanceof IllegalArgumentException || throwable instanceof JsonSyntaxException) {
+            message = "未能请求到数据！";
+        } else if (throwable instanceof UnknownHostException) {
+            if (!NetUtil.isNetworkConnected()) {
+                message = "好像没网络！请检查您的网络状态";
+                //无网络
+            } else {
+                //主机挂了，也就是你服务器关了
+                message = "服务器开小差,请稍后重试！";
+            }
+        } else if (throwable instanceof HttpException) {
             HttpException httpException = (HttpException) throwable;
             switch (httpException.code()) {
                 case UNAUTHORIZED:
@@ -44,20 +56,8 @@ public enum HttpError {
                     message = "网络错误(" + httpException.code() + ")";
                     break;
             }
-        } else if ( throwable instanceof SocketTimeoutException || throwable instanceof SocketException) {
-            message = "网络连接超时，请检查您的网络状态！";
-        }else if( throwable instanceof  IllegalArgumentException || throwable instanceof JsonSyntaxException){
-            message="未能请求到数据！";
-        }else if (throwable  instanceof UnknownHostException ){
-            if (!NetUtil.isNetworkConnected()) {
-                message="hello?好像没网络啊！";
-                //无网络
-            } else {
-                //主机挂了，也就是你服务器关了
-                message="服务器开小差,请稍后重试！";
-            }
-        }else {//其他错误
-            message="哎呀故障了！";
+        } else {//其他错误
+            message = "服务器连接失败！";
         }
         return message;
     }

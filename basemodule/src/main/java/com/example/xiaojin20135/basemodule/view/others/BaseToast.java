@@ -31,7 +31,7 @@ public class BaseToast {
 
             mToastNormal.setView(view);
             mToastNormal.setGravity(Gravity.CENTER,0,0);
-            mToastNormal.setDuration(Toast.LENGTH_SHORT);
+            mToastNormal.setDuration(Toast.LENGTH_LONG);
 //            mToastNormal = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);
         }
 
