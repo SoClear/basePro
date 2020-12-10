@@ -117,7 +117,10 @@ public class DatePickDialog {
 
         //只显示年月
         if(showMonthOnly){
-            ((ViewGroup)((ViewGroup)date_pick_view.getChildAt(0)).getChildAt(0)).getChildAt(1).setVisibility(View.GONE);
+            ((ViewGroup)((ViewGroup)date_pick_view.getChildAt(0))
+                    .getChildAt(0))
+                    .getChildAt(1)
+                    .setVisibility(View.GONE);
         }
 
         // 调整dialog背景大小

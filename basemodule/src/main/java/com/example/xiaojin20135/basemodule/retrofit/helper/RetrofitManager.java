@@ -2,6 +2,7 @@ package com.example.xiaojin20135.basemodule.retrofit.helper;
 
 import android.util.Log;
 
+import com.baronzhang.retrofit2.converter.FastJsonConverterFactory;
 import com.example.xiaojin20135.basemodule.activity.BaseApplication;
 import com.example.xiaojin20135.basemodule.retrofit.api.IServiceApi;
 import com.example.xiaojin20135.basemodule.retrofit.util.NetUtil;
@@ -87,7 +88,7 @@ public enum  RetrofitManager {
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(FastJsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
     }
@@ -105,7 +106,7 @@ public enum  RetrofitManager {
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(FastJsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
     }
@@ -139,7 +140,7 @@ public enum  RetrofitManager {
             }
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClientBuilder.addNetworkInterceptor(httpLoggingInterceptor);
+        httpClientBuilder.addInterceptor(httpLoggingInterceptor);
         httpClientBuilder.addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR);
         httpClientBuilder.addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR);
         httpClientBuilder.hostnameVerifier (new HostnameVerifier () {

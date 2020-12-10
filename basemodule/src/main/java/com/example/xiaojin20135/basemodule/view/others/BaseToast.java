@@ -15,27 +15,41 @@ public class BaseToast {
     private static Toast mToastNormal;
     private static View view;
 
+    private static String oldMsg;
+    private static long oneTime=0;
+    private static long twoTime=0;
+    private static TextView sTextView1;
+
     /**
      * 普通的toast提示
      * */
     public static void showNOrmalToast(Context mContext, String message){
 
-        BaseToast.cancel();
-
         if(mToastNormal == null){
-            mToastNormal=new Toast(mContext);
-            LayoutInflater inflater = LayoutInflater.from(mContext);
+            mToastNormal=new Toast(mContext.getApplicationContext());
+            LayoutInflater inflater = LayoutInflater.from(mContext.getApplicationContext());
             View view =inflater.inflate(R.layout.toast_layout,null);
-            TextView textView1=view.findViewById(R.id.toast_title);
-            textView1.setText(message);
-
+            sTextView1 = view.findViewById(R.id.toast_title);
+            sTextView1.setText(message);
             mToastNormal.setView(view);
             mToastNormal.setGravity(Gravity.CENTER,0,0);
             mToastNormal.setDuration(Toast.LENGTH_LONG);
-//            mToastNormal = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);
+            mToastNormal.show();
+            oneTime=System.currentTimeMillis();
+        }else {
+            twoTime=System.currentTimeMillis();
+            if(message.equals(oldMsg)){
+                if(twoTime-oneTime>Toast.LENGTH_LONG){
+                    mToastNormal.show();
+                }
+            }else{
+                oldMsg = message;
+                sTextView1.setText(message);
+                mToastNormal.show();
+            }
         }
 
-        mToastNormal.show();
+
 
     }
 
@@ -43,35 +57,7 @@ public class BaseToast {
      * 普通的toast提示
      * */
     public static void showNOrmalToast(Context mContext, int message){
-
-        BaseToast.cancel();
-
-        if(mToastNormal == null){
-            mToastNormal=new Toast(mContext);
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view =inflater.inflate(R.layout.toast_layout,null);
-            TextView textView1=view.findViewById(R.id.toast_title);
-            textView1.setText(message);
-
-            mToastNormal.setView(view);
-            mToastNormal.setGravity(Gravity.CENTER,0,0);
-            mToastNormal.setDuration(Toast.LENGTH_LONG);
-//            mToastNormal = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);
-        }
-
-        mToastNormal.show();
-
-    }
-    /**
-     *toast取消
-     */
-    public static void cancel(){
-
-        if(mToastNormal != null){
-            mToastNormal.cancel();
-            mToastNormal = null;
-        }
-
+        showNOrmalToast(mContext,mContext.getString(message));
     }
 
 }

@@ -499,7 +499,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlertDialog(this, "获取数据成功但是处理数据过程错误");
+                    showAlertDialog(this, "自定义回调处理异常"+e.getLocalizedMessage());
                 }
             } else {
                 showAlertDialog(this, "not found " + methodName + " method");
