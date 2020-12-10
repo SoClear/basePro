@@ -2,7 +2,6 @@ package com.example.xiaojin20135.basemodule.retrofit.helper;
 
 import android.util.Log;
 
-import com.baronzhang.retrofit2.converter.FastJsonConverterFactory;
 import com.example.xiaojin20135.basemodule.activity.BaseApplication;
 import com.example.xiaojin20135.basemodule.retrofit.api.IServiceApi;
 import com.example.xiaojin20135.basemodule.retrofit.util.NetUtil;
@@ -37,6 +36,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -88,7 +88,7 @@ public enum  RetrofitManager {
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(FastJsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
     }
@@ -106,7 +106,7 @@ public enum  RetrofitManager {
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(FastJsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
     }

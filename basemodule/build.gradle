@@ -48,7 +48,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     /** retrofit    **/
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     /** okhttp    **/
@@ -82,8 +82,6 @@ dependencies {
     compile 'com.bm.photoview:library:1.4.1'
 
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
-    compile 'com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2'
-    compile 'com.alibaba:fastjson:1.2.31'
     /** RxJava库   **/
     compile 'com.gengqiquan:Rx2ActivityResult:0.0.4'
     compile files('libs/zip4j_1.3.2.jar')
