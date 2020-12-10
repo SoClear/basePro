@@ -61,7 +61,7 @@ dependencies {
     /** 列表    **/
     compile 'com.yanzhenjie:recyclerview-swipe:1.0.4'
     /** 万能适配器    **/
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     /** MPAndroidChart 图表   **/
