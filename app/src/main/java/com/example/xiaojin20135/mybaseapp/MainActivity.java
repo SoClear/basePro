@@ -2,6 +2,7 @@ package com.example.xiaojin20135.mybaseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.example.xiaojin20135.mybaseapp.image.PickImageActivity;
 import com.example.xiaojin20135.mybaseapp.loaddata.LoadDataActivity;
 import com.example.xiaojin20135.mybaseapp.mpchart.MyChartActivity;
 import com.example.xiaojin20135.mybaseapp.normal.NormalEdittextActivity;
+import com.example.xiaojin20135.mybaseapp.normal.NormalTextViewActivity;
 import com.example.xiaojin20135.mybaseapp.recyclerview.MyRecyActivity;
 import com.example.xiaojin20135.mybaseapp.security.SecurityActivity;
 import com.example.xiaojin20135.mybaseapp.spinner.MySpinnerActivity;
@@ -41,6 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import rx.Observable;
+
 import static com.example.xiaojin20135.basemodule.util.ConstantUtil.MAP;
 import static com.example.xiaojin20135.basemodule.util.ConstantUtil.URLWEB;
 
@@ -54,7 +58,7 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
 //        initMenu();
 
         hideBarIcon();
-
+//        canGo(NormalTextViewActivity.class);
         LogUtils.DEBUG = true;
         LogUtils.v(TAG,"this is v info");
         LogUtils.d(TAG,"this is d info");
@@ -87,33 +91,10 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
 
     @Override
     protected void loadData() {
-        Log.d(TAG,"in loadData");
-    }
-
-    @Override
-    public void showProgress () {
 
     }
 
-    @Override
-    public void dismissProgress () {
-
-    }
-
-    @Override
-    public void loadDataSuccess (Object tData) {
-
-    }
-
-    @Override
-    public void loadError (Throwable throwable) {
-
-    }
-
-    @Override
-    public void loadComplete () {
-
-    }
+    private int age=0;
 
     @Override
     public void onClick (View v) {
@@ -224,7 +205,10 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
                 break;
             case R.id.normal_textvew_btn:
                 login();
+//                showToast(this,age+++"");
 //                canGo(NormalTextViewActivity.class);
+//                reStartApp();
+//                showProgress();
                 break;
         }
     }
@@ -232,11 +216,16 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
     public void  login(){
         HashMap map=new HashMap();
         map.put("username","7804");
-        map.put("password","E10ADC3949BA59ABBE56E057F20F883E");
-        HttpPostData("http://172.20.192.77:8900/app/login","loginsuccess",map);
+        map.put("password","c6b19fd9155dfa87e6351913e72dd9de");
+        HttpPostData("http://meet.topscomm.net:8974/app/appLogin","loginsuccess",map);
     }
     public void loginsuccess(ResponseBean responseBean){
         showToast(this,"成功");
+    }
+
+    @Override
+    public void requestError(ResponseBean responseBean) {
+        super.requestError(responseBean);
     }
 
     private void initMenu(){
