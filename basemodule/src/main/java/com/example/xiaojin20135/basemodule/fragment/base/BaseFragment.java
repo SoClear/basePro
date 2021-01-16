@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.xiaojin20135.basemodule.R;
 import com.example.xiaojin20135.basemodule.activity.BaseActivity;
 import com.example.xiaojin20135.basemodule.activity.SystemLogInterface;
@@ -55,6 +56,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         presenterImpl = new PresenterImpl (this,getContext ());
         TextView textView = new TextView (getActivity ());
         textView.setText (R.string.hello_blank_fragment);

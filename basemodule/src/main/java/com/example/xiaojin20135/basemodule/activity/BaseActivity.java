@@ -68,6 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
         addActivity(this);
         if (getLayoutId() != 0) {
             setContentView(getLayoutId());
