@@ -89,6 +89,6 @@ dependencies {
     /** RxJava库   **/
     compile 'com.gengqiquan:Rx2ActivityResult:0.0.4'
     compile files('libs/zip4j_1.3.2.jar')
-    compile ('com.alibaba:arouter-api:1.5.1'){ exclude group: 'com.android.support' }
+    api 'com.alibaba:arouter-api:1.5.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
