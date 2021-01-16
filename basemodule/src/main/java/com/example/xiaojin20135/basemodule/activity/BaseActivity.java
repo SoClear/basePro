@@ -62,19 +62,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
-    @Autowired(name = "/app/errorLog")
     SystemLogInterface mSystemLogInterface;
     private boolean isRestart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ARouter.getInstance().inject(this);
         addActivity(this);
         if (getLayoutId() != 0) {
             setContentView(getLayoutId());
         } else {
             //throw new IllegalArgumentException("返回一个正确的ContentView!");
         }
+        mSystemLogInterface= (SystemLogInterface) ARouter.getInstance().build("/app/errorLog").navigation();
         ButterKnife.bind(this);
         loadData();
         initView();
