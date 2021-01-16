@@ -501,7 +501,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlertDialog(this, "自定义回调处理异常"+e.getLocalizedMessage());
+                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
+//                    showAlertDialog(this, "数据处理异常");
                 }
             } else {
                 showAlertDialog(this, "not found " + methodName + " method");
@@ -533,7 +534,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlertDialog(this, "没有找到自定义回调：" + e.getLocalizedMessage());
+                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
                 }
             } else {
                 showAlertDialog(this, "not found " + methodName + " method");
@@ -555,7 +556,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlertDialog(this, "没有找到自定义回调：" + e.getLocalizedMessage());
+                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
                 }
             } else {
                 showAlertDialog(this, "not found " + errorMethodName + " method");

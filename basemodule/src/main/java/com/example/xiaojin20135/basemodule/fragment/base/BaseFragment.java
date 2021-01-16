@@ -339,7 +339,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
                     Log.d (TAG,"调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"获取数据成功但是处理数据过程错误");
+                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"数据处理异常");
                 }
             }else{
                 ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"not found "+methodName+" method");
@@ -370,7 +370,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
                     Log.d (TAG,"调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"没有找到自定义回调："+e.getLocalizedMessage ());
+                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
                 }
             }else{
                 ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"not found "+methodName+" method");
@@ -392,7 +392,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
                     Log.d (TAG,"调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),e.getLocalizedMessage ());
+                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
                 }
             }else{
                 ((BaseActivity)getActivity ()).showAlertDialog (getActivity (),"not found "+errorMethodName+" method");
