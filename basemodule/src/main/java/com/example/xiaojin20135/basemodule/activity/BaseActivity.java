@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
+import io.github.prototypez.appjoint.AppJoint;
 import okhttp3.MultipartBody;
 
 /**
@@ -60,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
-
+    private SystemLogInterface mSystemLogInterface;
     private boolean isRestart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } else {
             //throw new IllegalArgumentException("返回一个正确的ContentView!");
         }
+        mSystemLogInterface = AppJoint.service(SystemLogInterface.class);
         ButterKnife.bind(this);
         loadData();
         initView();
@@ -454,7 +456,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     public void loadError(Throwable throwable) {
         Log.d(TAG, "loadDataError");
-        requestError(HttpError.getErrorMessage(throwable));
+        requestError(mSystemLogInterface.getDetailLog(throwable,HttpError.getErrorMessage(throwable)));
     }
 
     @Override
@@ -564,9 +566,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     public void requestError(ResponseBean responseBean) {
         if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
-            requestError(responseBean.getActionResult().getMessage());
+            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getActionResult().getMessage()));
         } else if (responseBean.getMessage() != null) {
-            requestError(responseBean.getMessage());
+            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getMessage()));
         }
         if (responseBean.isTimeout()) {
             reStartApp();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.xiaojin20135.basemodule.R;
 import com.example.xiaojin20135.basemodule.activity.BaseActivity;
+import com.example.xiaojin20135.basemodule.activity.SystemLogInterface;
 import com.example.xiaojin20135.basemodule.retrofit.bean.ActionResult;
 import com.example.xiaojin20135.basemodule.retrofit.bean.ResponseBean;
 import com.example.xiaojin20135.basemodule.retrofit.helper.RetrofitManager;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.ButterKnife;
+import io.github.prototypez.appjoint.AppJoint;
 import okhttp3.MultipartBody;
 
 /**
@@ -44,6 +46,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
+    private SystemLogInterface mSystemLogInterface;
 
     public BaseFragment () {
         TAG = this.getClass ().getSimpleName ();
@@ -52,6 +55,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mSystemLogInterface = AppJoint.service(SystemLogInterface.class);
         presenterImpl = new PresenterImpl (this,getContext ());
         TextView textView = new TextView (getActivity ());
         textView.setText (R.string.hello_blank_fragment);
@@ -288,7 +292,8 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     @Override
     public void loadError (Throwable throwable) {
         Log.d (TAG,"loadDataError");
-        requestError (HttpError.getErrorMessage(throwable));
+        requestError(mSystemLogInterface.getDetailLog(throwable,HttpError.getErrorMessage(throwable)));
+//        requestError (HttpError.getErrorMessage(throwable));
         //((BaseActivity)getActivity ()).showToast (getActivity (),throwable.getLocalizedMessage ());
     }
 
@@ -397,9 +402,10 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     @Override
     public void requestError (ResponseBean responseBean) {
         if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
-            requestError(responseBean.getActionResult().getMessage());
+            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getActionResult().getMessage()));
         } else if (responseBean.getMessage() != null) {
-            requestError(responseBean.getMessage());
+            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getMessage()));
+//            requestError(responseBean.getMessage());
         }
         if (responseBean.isTimeout()) {
             cancleRequest();

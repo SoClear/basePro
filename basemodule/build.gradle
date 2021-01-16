@@ -85,4 +85,6 @@ dependencies {
     /** RxJava库   **/
     compile 'com.gengqiquan:Rx2ActivityResult:0.0.4'
     compile files('libs/zip4j_1.3.2.jar')
+    //组件化方案
+    implementation "io.github.prototypez:app-joint-core:1.7"
 }
