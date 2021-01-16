@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.example.xiaojin20135.basemodule.R;
 import com.example.xiaojin20135.basemodule.activity.BaseActivity;
 import com.example.xiaojin20135.basemodule.activity.SystemLogInterface;
@@ -27,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.ButterKnife;
-import io.github.prototypez.appjoint.AppJoint;
 import okhttp3.MultipartBody;
 
 /**
@@ -46,8 +46,8 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
-    private SystemLogInterface mSystemLogInterface;
-
+    @Autowired(name = "/app/errorLog")
+    SystemLogInterface mSystemLogInterface;
     public BaseFragment () {
         TAG = this.getClass ().getSimpleName ();
         Log.d("BaseActivity",TAG);
@@ -55,7 +55,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mSystemLogInterface = AppJoint.service(SystemLogInterface.class);
         presenterImpl = new PresenterImpl (this,getContext ());
         TextView textView = new TextView (getActivity ());
         textView.setText (R.string.hello_blank_fragment);

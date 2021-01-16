@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.xiaojin20135.basemodule.R;
 import com.example.xiaojin20135.basemodule.retrofit.bean.ActionResult;
 import com.example.xiaojin20135.basemodule.retrofit.bean.ResponseBean;
@@ -35,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
-import io.github.prototypez.appjoint.AppJoint;
 import okhttp3.MultipartBody;
 
 /**
@@ -61,7 +62,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
-    private SystemLogInterface mSystemLogInterface;
+    @Autowired(name = "/app/errorLog")
+    SystemLogInterface mSystemLogInterface;
     private boolean isRestart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } else {
             //throw new IllegalArgumentException("返回一个正确的ContentView!");
         }
-        mSystemLogInterface = AppJoint.service(SystemLogInterface.class);
         ButterKnife.bind(this);
         loadData();
         initView();
