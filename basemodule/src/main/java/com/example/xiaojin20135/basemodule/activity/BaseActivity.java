@@ -73,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } else {
             //throw new IllegalArgumentException("返回一个正确的ContentView!");
         }
-        mSystemLogInterface= (SystemLogInterface) ARouter.getInstance().build("/app/errorLog").navigation();
+        mSystemLogInterface= ARouter.getInstance().navigation(SystemLogInterface.class);
         ButterKnife.bind(this);
         loadData();
         initView();

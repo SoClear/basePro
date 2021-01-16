@@ -56,7 +56,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mSystemLogInterface= (SystemLogInterface) ARouter.getInstance().build("/app/errorLog").navigation();
+        mSystemLogInterface= ARouter.getInstance().navigation(SystemLogInterface.class);
         presenterImpl = new PresenterImpl (this,getContext ());
         TextView textView = new TextView (getActivity ());
         textView.setText (R.string.hello_blank_fragment);
