@@ -47,7 +47,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private String lastSuffix = "";//最后一次请求后缀
 
     private int lastReqCode = -1;
-    @Autowired(name = "/app/errorLog")
     SystemLogInterface mSystemLogInterface;
     public BaseFragment () {
         TAG = this.getClass ().getSimpleName ();
@@ -71,6 +70,13 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 
     protected abstract void initEvents(View view);
 
+    private String getErrorMessage(Throwable throwable,String message) {
+        if (mSystemLogInterface != null) {
+            return mSystemLogInterface.getDetailLog(throwable,message);
+        } else {
+            return message;
+        }
+    }
 
 
     @Override
@@ -293,7 +299,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     @Override
     public void loadError (Throwable throwable) {
         Log.d (TAG,"loadDataError");
-        requestError(mSystemLogInterface.getDetailLog(throwable,HttpError.getErrorMessage(throwable)));
+        requestError(getErrorMessage(throwable,HttpError.getErrorMessage(throwable)));
 //        requestError (HttpError.getErrorMessage(throwable));
         //((BaseActivity)getActivity ()).showToast (getActivity (),throwable.getLocalizedMessage ());
     }
@@ -403,9 +409,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     @Override
     public void requestError (ResponseBean responseBean) {
         if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
-            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getActionResult().getMessage()));
+            requestError(getErrorMessage(new Throwable(responseBean.getRequestMineUrl()),responseBean.getActionResult().getMessage()));
         } else if (responseBean.getMessage() != null) {
-            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getMessage()));
+            requestError(getErrorMessage(new Throwable(responseBean.getRequestMineUrl()),responseBean.getMessage()));
 //            requestError(responseBean.getMessage());
         }
         if (responseBean.isTimeout()) {

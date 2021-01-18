@@ -64,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private int lastReqCode = -1;
     SystemLogInterface mSystemLogInterface;
     private boolean isRestart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } else {
             //throw new IllegalArgumentException("返回一个正确的ContentView!");
         }
-        mSystemLogInterface= ARouter.getInstance().navigation(SystemLogInterface.class);
+        mSystemLogInterface = ARouter.getInstance().navigation(SystemLogInterface.class);
         ButterKnife.bind(this);
         loadData();
         initView();
@@ -144,7 +145,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, String text, String title) {
-        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
+        alertDialog = new AlertDialog.Builder(context, R.style.BDAlertDialog);
         alertDialog.setTitle(title);
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
@@ -158,7 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, String text) {
-        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
+        alertDialog = new AlertDialog.Builder(context, R.style.BDAlertDialog);
         alertDialog.setTitle("");
         alertDialog.setMessage(text);
         alertDialog.setCancelable(false);
@@ -172,7 +173,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public void showAlertDialog(Context context, int id) {
-        alertDialog = new AlertDialog.Builder(context,R.style.BDAlertDialog);
+        alertDialog = new AlertDialog.Builder(context, R.style.BDAlertDialog);
         alertDialog.setTitle("");
         alertDialog.setMessage(id);
         alertDialog.setCancelable(false);
@@ -193,7 +194,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         }
         toast.show();*/
 //        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
-        BaseToast.showNOrmalToast(mContext,text);
+        BaseToast.showNOrmalToast(mContext, text);
     }
 
     public static void showToast(Context mContext, int id) {
@@ -203,7 +204,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             toast.setText(id);
         }
         toast.show();*/
-        BaseToast.showNOrmalToast(mContext,id);
+        BaseToast.showNOrmalToast(mContext, id);
     }
 
     /**
@@ -236,7 +237,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         //等待框
         if (isShowProgressDialog) {
             if (progressDialog == null || !progressDialog.isShowing()) {
-                progressDialog = new ProgressDialog(this,R.style.BDAlertDialog);
+                progressDialog = new ProgressDialog(this, R.style.BDAlertDialog);
             }
 //            Window window = getWindow();
 //            window.setWindowAnimations(R.style.NoAnimationDialog); // 添加动画
@@ -265,7 +266,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     public void showProgress(boolean hideTitle, String message, boolean cancled) {
         //等待框
         if (progressDialog == null || !progressDialog.isShowing()) {
-            progressDialog = new ProgressDialog(this,R.style.BDAlertDialog);
+            progressDialog = new ProgressDialog(this, R.style.BDAlertDialog);
         }
         progressDialog.setMessage(message);
         if (!hideTitle) {
@@ -285,7 +286,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            progressDialog=null;
+            progressDialog = null;
         }
     }
 
@@ -457,7 +458,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     public void loadError(Throwable throwable) {
         Log.d(TAG, "loadDataError");
-        requestError(mSystemLogInterface.getDetailLog(throwable,HttpError.getErrorMessage(throwable)));
+        requestError(getErrorMessage(throwable,HttpError.getErrorMessage(throwable)));
+    }
+
+    private String getErrorMessage(Throwable throwable,String message) {
+        if (mSystemLogInterface != null) {
+            return mSystemLogInterface.getDetailLog(throwable,message);
+        } else {
+            return message;
+        }
     }
 
     @Override
@@ -502,7 +511,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
+                    loadError(new Throwable("数据回调异常url：" + responseBean.getRequestMineUrl() + "方法名:" + methodName));
 //                    showAlertDialog(this, "数据处理异常");
                 }
             } else {
@@ -535,7 +544,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
+                    loadError(new Throwable("数据回调异常url：" + responseBean.getRequestMineUrl() + "方法名:" + methodName));
                 }
             } else {
                 showAlertDialog(this, "not found " + methodName + " method");
@@ -557,7 +566,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                     Log.d(TAG, "调用自定义方法");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    loadError(new Throwable("数据回调异常url："+responseBean.getRequestMineUrl()+"方法名:"+methodName));
+                    loadError(new Throwable("数据回调异常url：" + responseBean.getRequestMineUrl() + "方法名:" + methodName));
                 }
             } else {
                 showAlertDialog(this, "not found " + errorMethodName + " method");
@@ -567,10 +576,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     @Override
     public void requestError(ResponseBean responseBean) {
-        if (responseBean.getActionResult()!=null&&responseBean.getActionResult().getMessage() != null) {
-            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getActionResult().getMessage()));
+        if (responseBean.getActionResult() != null && responseBean.getActionResult().getMessage() != null) {
+//            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()), responseBean.getActionResult().getMessage()));
+            requestError(getErrorMessage(new Throwable(responseBean.getRequestMineUrl()), responseBean.getActionResult().getMessage()));
         } else if (responseBean.getMessage() != null) {
-            requestError(mSystemLogInterface.getDetailLog(new Throwable(responseBean.getRequestMineUrl()),responseBean.getMessage()));
+            requestError(getErrorMessage(new Throwable(responseBean.getRequestMineUrl()), responseBean.getMessage()));
         }
         if (responseBean.isTimeout()) {
             reStartApp();
@@ -589,8 +599,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     public void reStartApp() {
         cancleRequest();
-        if (!isRestart){
-            isRestart=true;
+        if (!isRestart) {
+            isRestart = true;
             Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
