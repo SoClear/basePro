@@ -297,15 +297,22 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-17 10:23
      * @Describe 请求数据 ，带完整路径，自定义回调方法
      */
-    public void tryToGetData(String url, String methodName, Map paraMap, RequestType ... requestTypes) {
+    public void tryToGetData(String url, String methodName, Map paraMap) {
+        lastReqCode = 1;
+        lastUrl = url;
+        lastMethodName = methodName;
+        lastMap = paraMap;
+        presenterImpl.loadData(url+".json",methodName,paraMap);
+    }
+
+    public void tryToGetData(String url, String methodName, Map paraMap, RequestType requestType) {
         lastReqCode = 1;
         lastUrl = url;
         lastMethodName = methodName;
         lastMap = paraMap;
         String urlTemp=url+".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.loadData(urlTemp, methodName, paraMap);
-        // presenterImpl.loadData(url+".json",methodName,paraMap);
+        urlTemp=handleRequestType(urlTemp,requestType);
+        presenterImpl.loadData(urlTemp,methodName,paraMap);
     }
 
     /**
@@ -313,16 +320,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-17 10:23
      * @Describe 请求数据 ，带完整路径，自定义回调方法
      */
-    public void tryToGetData(String url, String methodName, String errorMethodName, Map paraMap, RequestType ... requestTypes) {
+    public void tryToGetData(String url, String methodName, String errorMethodName, Map paraMap) {
         lastReqCode = 2;
         lastUrl = url;
         lastMethodName = methodName;
         lastErrorMethodName = errorMethodName;
         lastMap = paraMap;
+        presenterImpl.loadData(url, methodName, errorMethodName, paraMap);
+    }
+
+    public void tryToGetData(String url, String methodName, String errorMethodName, Map paraMap, RequestType  requestType) {
+        lastReqCode = 2;
+        lastUrl = url;
+        lastMethodName = methodName;
+        lastErrorMethodName = errorMethodName;
         String urlTemp=url+".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.loadData(urlTemp, methodName, errorMethodName, paraMap);
-        // presenterImpl.loadData(url+".json", methodName, errorMethodName, paraMap);
     }
 
     /**
@@ -330,16 +344,20 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-17 10:23
      * @Describe 请求数据 ，带完整路径，固定回调方法
      */
-    public void tryToGetData(String url, Map paraMap, RequestType ... requestTypes) {
+    public void tryToGetData(String url, Map paraMap) {
         lastReqCode = 3;
         lastUrl = url;
         lastMap = paraMap;
-        String urlTemp=url+".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.loadData(urlTemp, paraMap);
+        presenterImpl.loadData(url, paraMap);
         // presenterImpl.loadData(url + ".json", paraMap);
     }
 
+    public void tryToGetData(String url, Map paraMap, RequestType requestType) {
+        String urlTemp=url+".json";
+        urlTemp=handleRequestType(urlTemp,requestType);
+        this.tryToGetData(urlTemp,paraMap);
+    }
+
     /**
      * @Description: 平台2.0新请求方式
      * @Parames [url, paraMap]
@@ -347,29 +365,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @date 2020/4/14
      * @version V1.0
      */
-    public void HttpGetData(String url, String methodName, Map paraMap, RequestType ... requestTypes) {
+    public void HttpGetData(String url, String methodName, Map paraMap) {
         lastUrl = url;
         lastMap = paraMap;
-        String urlTemp=url;
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.getData(urlTemp, methodName, paraMap);
+        presenterImpl.getData(url, methodName, paraMap);
         // presenterImpl.getData(url, methodName, paraMap);
     }
 
-    /**
-     * @Description: 平台2.0新请求方式
-     * @Parames [url, paraMap]
-     * @author 龙少
-     * @date 2020/4/14
-     * @version V1.0
-     */
-    public void HttpPostData(String url, String methodName, Map paraMap, RequestType ... requestTypes) {
-        lastUrl = url;
-        lastMap = paraMap;
+    public void HttpGetData(String url, String methodName, Map paraMap, RequestType  requestType) {
         String urlTemp=url;
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.postData(urlTemp, methodName, paraMap);
-        // presenterImpl.postData(url, methodName, paraMap);
+        urlTemp=handleRequestType(urlTemp,requestType);
+        this.HttpGetData(urlTemp,methodName,paraMap);
     }
 
     /**
@@ -379,13 +385,37 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @date 2020/4/14
      * @version V1.0
      */
-    public void HttpPutData(String url, String methodName, Map paraMap, RequestType ... requestTypes) {
+    public void HttpPostData(String url, String methodName, Map paraMap) {
         lastUrl = url;
         lastMap = paraMap;
+        presenterImpl.postData(url, methodName, paraMap);
+        // presenterImpl.postData(url, methodName, paraMap);
+    }
+
+    public void HttpPostData(String url, String methodName, Map paraMap, RequestType requestType) {
         String urlTemp=url;
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.putData(urlTemp, methodName, paraMap);
+        urlTemp=handleRequestType(urlTemp,requestType);
+        this.HttpPostData(urlTemp,methodName,paraMap);
+    }
+
+    /**
+     * @Description: 平台2.0新请求方式
+     * @Parames [url, paraMap]
+     * @author 龙少
+     * @date 2020/4/14
+     * @version V1.0
+     */
+    public void HttpPutData(String url, String methodName, Map paraMap) {
+        lastUrl = url;
+        lastMap = paraMap;
+        presenterImpl.putData(url, methodName, paraMap);
         //presenterImpl.putData(url, methodName, paraMap);
+    }
+
+    public void HttpPutData(String url, String methodName, Map paraMap, RequestType requestType) {
+        String urlTemp=url;
+        urlTemp=handleRequestType(urlTemp,requestType);
+        presenterImpl.putData(urlTemp, methodName, paraMap);
     }
 
     /**
@@ -393,14 +423,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-17 10:39
      * @Describe 请求数据，带请求方法，并自定义回调方法
      */
-    public void getDataWithMethod(String url, Map paraMap, RequestType ... requestTypes) {
+    public void getDataWithMethod(String url, Map paraMap) {
         lastReqCode = 4;
         lastUrl = url;
         lastMap = paraMap;
+        presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", url, paraMap);
+    }
+
+    public void getDataWithMethod(String url, Map paraMap, RequestType requestType) {
         String urlTemp=RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
-        presenterImpl.loadData(urlTemp, url, paraMap);
-        // presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", url, paraMap);
+        urlTemp=handleRequestType(urlTemp,requestType);
+        presenterImpl.loadData(urlTemp,paraMap);
     }
 
     /**
@@ -408,15 +441,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-09-01 9:35
      * @Describe 上传文件
      */
-    public void uploadFileWithMethod(String url, Map paraMap, MultipartBody.Part[] filePart, RequestType ... requestTypes) {
+    public void uploadFileWithMethod(String url, Map paraMap, MultipartBody.Part[] filePart) {
         lastReqCode = 5;
         lastUrl = url;
         lastMap = paraMap;
         lastFilePart = filePart;
+        presenterImpl.uploadFile(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", url, paraMap, filePart);
+    }
+
+    public void uploadFileWithMethod(String url, Map paraMap, MultipartBody.Part[] filePart, RequestType  requestType) {
         String urlTemp=RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.uploadFile(urlTemp, url, paraMap, filePart);
-        // presenterImpl.uploadFile(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", url, paraMap, filePart);
     }
 
 
@@ -427,15 +463,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @param paraMap
      * @param filePart
      */
-    public void uploadFileWithTotalUrl(String url, Map paraMap, MultipartBody.Part[] filePart, RequestType ... requestTypes) {
+    public void uploadFileWithTotalUrl(String url, Map paraMap, MultipartBody.Part[] filePart) {
         lastReqCode = 6;
         lastUrl = url;
         lastMap = paraMap;
         lastFilePart = filePart;
+        presenterImpl.uploadFile(url + ".json", url, paraMap, filePart);
+    }
+
+    public void uploadFileWithTotalUrl(String url, Map paraMap, MultipartBody.Part[] filePart, RequestType requestType) {
         String urlTemp=url+".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.uploadFile(urlTemp, url, paraMap, filePart);
-        // presenterImpl.uploadFile(url + ".json", url, paraMap, filePart);
     }
 
     /**
@@ -443,14 +482,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-17 10:39
      * @Describe 请求数据，带请求方法，固定回调方法
      */
-    public void getDataWithCommonMethod(String url, Map paraMap, RequestType ... requestTypes) {
+    public void getDataWithCommonMethod(String url, Map paraMap) {
         lastReqCode = 7;
         lastUrl = url;
         lastMap = paraMap;
+        presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", paraMap);
+    }
+
+    public void getDataWithCommonMethod(String url, Map paraMap, RequestType  requestType) {
         String urlTemp=RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json";
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.loadData(urlTemp, paraMap);
-        //presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + ".json", paraMap);
     }
 
 
@@ -459,15 +501,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-19 8:39
      * @Describe 请求数据，带请求方法和和后缀，自定义回调方法
      */
-    public void getDataWithMethod(String url, String suffix, Map paraMap, RequestType ... requestTypes) {
+    public void getDataWithMethod(String url, String suffix, Map paraMap) {
         lastReqCode = 8;
         lastUrl = url;
         lastSuffix = suffix;
         lastMap = paraMap;
+        presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix, url, paraMap);
+    }
+
+    public void getDataWithMethod(String url, String suffix, Map paraMap, RequestType  requestType) {
         String urlTemp=RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix;
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.loadData(urlTemp, url, paraMap);
-        // presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix, url, paraMap);
     }
 
     /**
@@ -475,15 +520,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @createon 2018-07-19 8:39
      * @Describe 请求数据，带请求方法和和后缀，固定回调方法
      */
-    public void getDataWithCommonMethod(String url, String suffix, Map paraMap, RequestType ... requestTypes) {
+    public void getDataWithCommonMethod(String url, String suffix, Map paraMap) {
         lastReqCode = 9;
         lastUrl = url;
         lastSuffix = suffix;
         lastMap = paraMap;
+        presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix, paraMap);
+    }
+
+    public void getDataWithCommonMethod(String url, String suffix, Map paraMap, RequestType  requestType) {
         String urlTemp=RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix;
-        urlTemp=handleRequestType(urlTemp,requestTypes);
+        urlTemp=handleRequestType(urlTemp,requestType);
         presenterImpl.loadData(urlTemp, paraMap);
-        // presenterImpl.loadData(RetrofitManager.RETROFIT_MANAGER.BASE_URL + url + suffix, paraMap);
     }
 
 
@@ -890,12 +938,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     /**
      * 此方法属于控制是否拼接uuid的核心方法，承上启下。
      * @param url 未拼接的url
-     * @param types
+     * @param
      * @return 返回是否各种情形需要的完整url
      */
-    private String  handleRequestType(String url, RequestType [] types) {
-        Log.d("handleRequestType","url"+url+"typesize:"+types.length);
-        if(types.length==0) {
+    private String  handleRequestType(String url, RequestType  type) {
+        Log.d("handleRequestType","url"+url);
+        if(type!=RequestType.INSERT) {
             Log.d("handleRequestType","不需要拼接uuid");
             return  url; // 不需要添加uuid的请求原路返回url
         }
