@@ -715,7 +715,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
      * @return
      */
     private RequestUUID generateRequestUUID() {
-        RequestUUID requestUUIDNew=new RequestUUID("Android_"+getMySharedPreferences().getString("TOPSPROSYS","")+"_"+ UUID.randomUUID().toString(),false);
+        RequestUUID requestUUIDNew=new RequestUUID("android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString(),false);
         return requestUUIDNew;
 
     }
@@ -787,7 +787,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private SharedPreferences sharedPreferences;
     public SharedPreferences getMySharedPreferences() {
         if (sharedPreferences == null) {
-            sharedPreferences = getActivity().getSharedPreferences(ConstantUtil.loginInfo, MODE_PRIVATE);
+            sharedPreferences = getActivity().getSharedPreferences("TOPSPROSYS", MODE_PRIVATE);
         }
         return sharedPreferences;
     }

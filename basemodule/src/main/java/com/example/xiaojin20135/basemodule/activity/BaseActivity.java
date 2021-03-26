@@ -902,7 +902,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * @return
      */
     private RequestUUID generateRequestUUID() {
-        RequestUUID requestUUIDNew=new RequestUUID("Android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString(),false);
+        RequestUUID requestUUIDNew=new RequestUUID("android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString(),false);
         return requestUUIDNew;
 
     }
