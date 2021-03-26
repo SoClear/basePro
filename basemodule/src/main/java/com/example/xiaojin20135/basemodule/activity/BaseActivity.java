@@ -965,7 +965,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      */
     private String generateFullUrl(String urlPart){
         RequestUUID requestUUID=generateRequestUUID();
-        String urlFull=urlPart+"billuid?"+requestUUID.getUUID();
+        String urlFull=urlPart+"?billuid="+requestUUID.getUUID();
         hashMapURL.put(urlPart,urlFull);
         hashMapUUID.put(urlFull,requestUUID); // 每次生成UUID都要去覆盖或者推入此hashMap
         return urlFull;
