@@ -715,7 +715,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
      * @return
      */
     private RequestUUID generateRequestUUID() {
-        RequestUUID requestUUIDNew=new RequestUUID("Android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString(),false);
+        RequestUUID requestUUIDNew=new RequestUUID("Android_"+getMySharedPreferences().getString("TOPSPROSYS","")+"_"+ UUID.randomUUID().toString(),false);
         return requestUUIDNew;
 
     }

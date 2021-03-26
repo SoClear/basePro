@@ -140,7 +140,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     public SharedPreferences getMySharedPreferences() {
         if (sharedPreferences == null) {
-            sharedPreferences = getSharedPreferences(ConstantUtil.loginInfo, MODE_PRIVATE);
+            sharedPreferences = getSharedPreferences("TOPSPROSYS", MODE_PRIVATE);
         }
         return sharedPreferences;
     }
