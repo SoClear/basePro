@@ -787,7 +787,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private SharedPreferences sharedPreferences;
     public SharedPreferences getMySharedPreferences() {
         if (sharedPreferences == null) {
-            sharedPreferences = getActivity().getSharedPreferences(ConstantUtil.SHAREDNAME, MODE_PRIVATE);
+            sharedPreferences = getActivity().getSharedPreferences(ConstantUtil.loginInfo, MODE_PRIVATE);
         }
         return sharedPreferences;
     }
