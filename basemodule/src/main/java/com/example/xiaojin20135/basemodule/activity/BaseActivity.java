@@ -921,7 +921,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     /**
      * 子类进行传值，基类进行判断是否添加UUID或者后续其他操作
      */
-    enum RequestType {
+    public enum RequestType {
         INSERT, UPDATE, DELETE
     }
 
