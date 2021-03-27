@@ -725,8 +725,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
      * @param url 完整url
      */
     private void resetRequestUUID(String url) {
-        Log.d("resetRequestUUID","*********");
+        Log.d("resetRequestUUID","*****responseBean:url--->"+url);
         if(url!=null&&hashMapUUID.containsKey(url)) {
+            Log.e("resetRequestUUID","重置成功");
             hashMapUUID.get(url).setIdNeedFlush(true);
         }
     }
