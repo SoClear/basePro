@@ -715,7 +715,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
      * @return
      */
     private RequestUUID generateRequestUUID() {
-        RequestUUID requestUUIDNew=new RequestUUID("android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString(),false);
+        RequestUUID requestUUIDNew=new RequestUUID("android_"+getMySharedPreferences().getString(ConstantUtil.loginName,"")+"_"+ UUID.randomUUID().toString().replace("-",""),false);
         return requestUUIDNew;
 
     }
@@ -727,7 +727,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     private void resetRequestUUID(String url) {
         Log.d("resetRequestUUID","*****responseBean:url--->"+url);
         if(url!=null&&hashMapUUID.containsKey(url)) {
-            Log.e("resetRequestUUID","重置成功");
+            Log.d("resetRequestUUID","重置成功");
             hashMapUUID.get(url).setIdNeedFlush(true);
         }
     }
