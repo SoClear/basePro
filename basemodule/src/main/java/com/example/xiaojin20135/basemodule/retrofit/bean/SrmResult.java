@@ -6,13 +6,13 @@ package com.example.xiaojin20135.basemodule.retrofit.bean;
  */
 public class SrmResult {
     // 角标数量
-    private String total;
+    private int total;
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 }
