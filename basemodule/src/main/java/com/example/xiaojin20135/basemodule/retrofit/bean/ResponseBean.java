@@ -45,6 +45,8 @@ public class ResponseBean {
     private Map result;
     private String requestMineUrl;
 
+    private SrmResult data;
+
     public String getRequestMineUrl() {
         return requestMineUrl;
     }
@@ -336,5 +338,13 @@ public class ResponseBean {
 
     public void setMailtypeList (List<Map> mailtypeList) {
         this.mailtypeList = mailtypeList;
+    }
+
+    public SrmResult getData() {
+        return data;
+    }
+
+    public void setData(SrmResult data) {
+        this.data = data;
     }
 }
