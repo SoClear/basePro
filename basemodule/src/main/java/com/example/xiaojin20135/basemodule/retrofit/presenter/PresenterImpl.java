@@ -24,10 +24,10 @@ public class PresenterImpl extends BasePresenterImp<IBaseView,ResponseBean> impl
      *
      * @param view
      */
-    public PresenterImpl (IBaseView view,Context context) {
+    public PresenterImpl (IBaseView view, Context context) {
         super (view);
         this.context = context;
-        this.baseModel = new BaseModelImpl (context);
+        this.baseModel = new BaseModelImpl(context);
     }
 
 
@@ -54,7 +54,7 @@ public class PresenterImpl extends BasePresenterImp<IBaseView,ResponseBean> impl
     }
 
     @Override
-    public void loadData (String url, String methodName, String errorMethodName, Map paraMap) {
+    public void loadData (String url, String methodName, String errorMethodName, Map<String, String> paraMap) {
         baseModel.loadData (url,methodName,errorMethodName,paraMap,this);
     }
 

@@ -52,7 +52,7 @@ public interface IBasePresenter {
      * @param url
      * @param paraMap
      */
-    void loadData(String url, String methodName, String errorMethodName, Map paraMap);
+    void loadData(String url, String methodName, String errorMethodName, Map<String, String> paraMap);
 
     /**
      * @author lixiaojin

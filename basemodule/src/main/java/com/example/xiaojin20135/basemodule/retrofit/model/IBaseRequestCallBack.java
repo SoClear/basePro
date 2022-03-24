@@ -28,9 +28,9 @@ public interface IBaseRequestCallBack<T> {
      * 请求成功
      * @param callBack
      */
-    void requestSuccess(T callBack,String methodName);
+    void requestSuccess(T callBack, String methodName);
 
-     void requestSuccess (T callBack, String methodName,String errorMethodName);
+     void requestSuccess(T callBack, String methodName, String errorMethodName);
     /**
      * 请求成功
      * @param callBack

@@ -39,7 +39,7 @@ public interface IBaseView<T> {
      * @param message
      * @param cancled
      */
-    void showProgress(boolean hideTitle,String message,boolean cancled);
+    void showProgress(boolean hideTitle, String message, boolean cancled);
 
     /**
      * 请求结束后隐藏progress
@@ -54,8 +54,8 @@ public interface IBaseView<T> {
     /**
      * 请求数据成功
      */
-    void loadSuccess(T tData,String methodName);
-     void loadSuccess (Object tData, String methodName,String errorMethodName);
+    void loadSuccess(T tData, String methodName);
+     void loadSuccess(Object tData, String methodName, String errorMethodName);
     /**
      * 请求数据失败
      */

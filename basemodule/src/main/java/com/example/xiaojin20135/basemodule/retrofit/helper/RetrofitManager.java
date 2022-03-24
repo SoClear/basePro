@@ -35,8 +35,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -87,7 +86,7 @@ public enum  RetrofitManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
@@ -105,7 +104,7 @@ public enum  RetrofitManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(httpClientBuilder.build ())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iServiceApi = retrofit.create(IServiceApi.class);
@@ -120,7 +119,7 @@ public enum  RetrofitManager {
     }
 
     private void initOkHttpClient(Interceptor interceptor) {
-        ClearableCookieJar cookieJar = new PersistentCookieJar (new SetCookieCache (),new SharedPrefsCookiePersistor (BaseApplication.getInstance()));
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(BaseApplication.getInstance()));
         //创建okhttp，写入缓存机制，还有addInteceptor
         httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS); //连接超时时间
