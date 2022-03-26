@@ -4,6 +4,7 @@ import com.example.xiaojin20135.basemodule.retrofit.bean.ResponseBean;
 
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -20,7 +21,6 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
-import rx.Observable;
 
 /**
  * Created by lixiaojin on 2018-07-12.
@@ -37,7 +37,6 @@ public interface IServiceApi {
      */
     @FormUrlEncoded
     @POST
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
     //添加
     Observable<ResponseBean> load(@Url String url, @FieldMap Map<String, String> options);
 

@@ -1,16 +1,9 @@
 package com.example.xiaojin20135.basemodule.retrofit.presenter;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.example.xiaojin20135.basemodule.retrofit.api.IServiceApi;
-import com.example.xiaojin20135.basemodule.retrofit.model.BaseModelImpl;
 import com.example.xiaojin20135.basemodule.retrofit.model.IBaseRequestCallBack;
 import com.example.xiaojin20135.basemodule.retrofit.view.IBaseView;
-
-import java.util.Map;
-
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by lixiaojin on 2018-07-12.
