@@ -1,1 +1,1 @@
-##compile 'com.github.lxj-helloworld:basePro:1.11.40'
+##implementation 'com.github.topscommandroid:basePro:1.12.46'
