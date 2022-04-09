@@ -37,6 +37,7 @@ public interface IServiceApi {
      */
     @FormUrlEncoded
     @POST
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
     //添加
     Observable<ResponseBean> load(@Url String url, @FieldMap Map<String, String> options);
 
