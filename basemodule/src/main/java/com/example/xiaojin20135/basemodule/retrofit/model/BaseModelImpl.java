@@ -32,8 +32,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
     private IServiceApi iServiceApi;
     private CompositeDisposable compositeDisposable;
     private Gson gson;
-    private final int retryTimes = 3;//重试次数
-    private final int retryTimeDelay = 500;//延迟重试间隔
+    //是否需要重试，应该设置为接口参数可配置，由具体的业务自行决定,此处为临时方案
+    private final int RETRY_TIMES = 3;//重试次数
+    private final int RETRY_TIMES_DELAY = 500;//延迟重试间隔
     private final String EXCEPTION_RETRY = "exception_retry";//重试，不需要延迟
 
     public BaseModelImpl(Context context){
@@ -62,9 +63,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -100,9 +101,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -138,9 +139,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -176,9 +177,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -213,9 +214,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -253,9 +254,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -294,9 +295,9 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     }
                 }).retryWhen(observable -> observable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
                     currentRetryTime.getAndIncrement();
-                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < retryTimes) {
-                        return Observable.timer(retryTimeDelay, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < retryTimes){
+                    if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
+                        return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
+                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -319,10 +320,24 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
         compositeDisposable.clear();
     }
 
+    /**
+     * 500：服务器内部错误（用户权限、数据库连接等问题）
+     * 503：服务器暂停
+     * 504：网关超时
+     * @param errMsg 服务器返回错误信息
+     * @return
+     */
     private boolean isNeedTryDelay(String errMsg) {
         return errMsg != null && (errMsg.contains("500") || errMsg.contains("503") || errMsg.contains("504"));
     }
 
+    /**
+     * -1001：服务器请求超时
+     * -1004：服务器连接失败
+     * -1005：服务器连接被中断
+     * @param code
+     * @return
+     */
     private boolean isNeedTry(String code) {
         return "-1001".equals(code) || "-1004".equals(code) || "-1005".equals(code);
     }
