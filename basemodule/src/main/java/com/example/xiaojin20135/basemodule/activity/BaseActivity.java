@@ -850,6 +850,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     protected void onDestroy() {
         super.onDestroy();
         cancleRequest();
+        removeActivity(this);
     }
 
     /*
