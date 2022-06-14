@@ -69,7 +69,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
 
                 }))
@@ -107,7 +107,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 })).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -145,7 +145,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 })).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -183,7 +183,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 })).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -220,7 +220,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 })).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -260,7 +260,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 }))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -301,7 +301,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
-                        throw new Exception("接口调用失败");
+                        throw new Exception("接口调用失败:" + throwable.getMessage());
                     }
                 })).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
