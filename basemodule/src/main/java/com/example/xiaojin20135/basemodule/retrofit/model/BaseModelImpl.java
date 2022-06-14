@@ -7,6 +7,7 @@ import com.example.xiaojin20135.basemodule.retrofit.api.IServiceApi;
 import com.example.xiaojin20135.basemodule.retrofit.bean.ResponseBean;
 import com.google.gson.Gson;
 
+import java.net.SocketTimeoutException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -65,7 +66,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -103,7 +104,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -141,7 +142,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -179,7 +180,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -216,7 +217,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -256,7 +257,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
@@ -297,7 +298,7 @@ public class BaseModelImpl extends BaseModel implements IBaseModel<ResponseBean>
                     currentRetryTime.getAndIncrement();
                     if (isNeedTryDelay(new Gson().toJson(throwable)) && currentRetryTime.get() < RETRY_TIMES) {
                         return Observable.timer(RETRY_TIMES_DELAY, TimeUnit.MILLISECONDS);
-                    } else if (EXCEPTION_RETRY.equals(throwable.getMessage()) && currentRetryTime.get() < RETRY_TIMES){
+                    } else if ((EXCEPTION_RETRY.equals(throwable.getMessage()) || throwable instanceof SocketTimeoutException) && currentRetryTime.get() < RETRY_TIMES){
                         return Observable.just("");
                     } else {
                         throw new Exception("接口调用失败");
